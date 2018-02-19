@@ -28,3 +28,5 @@ else
 end
 
 default['sqlce']['4.0']['home']    = "#{ENV['SYSTEMDRIVE']}\\Program Files\\Microsoft SQL Server Compact Edition\\v4.0"
+
+default['sqlce']['installation_reboot_mode'] = 'no_reboot'
