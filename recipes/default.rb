@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-windows_reboot 5 do
-  reason 'SQL CE 4.0 SP1 Install Complete'
+reboot 'sqlce' do
+  delay_mins 1
   action :nothing
 end
 
@@ -26,7 +26,7 @@ end
 windows_package node['sqlce']['4.0']['package_name'] do
   source node['sqlce']['4.0']['url']
   installer_type :custom
-  options "/Q /I REBOOT=R"
+  options "/i /quiet"
   action :install
-  # notifies :request, "windows_reboot[5]"
+  notifies :reboot_now, 'reboot[sqlce]', :immediately if node['sqlce']['installation_reboot_mode'] != 'no_reboot'
 end
